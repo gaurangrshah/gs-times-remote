@@ -4,34 +4,36 @@ const UseForm2 = () => {
   const addCounterFormEl = useRef()
   const [submitted, setSubmitted] = useState([])
 
+  let formInputs
   // console.log(addCounterFormEl.current.elements)
   useEffect(() => {
     console.log("submitted")
-    // localStorage.setItem("useForm2", JSON.stringify(submitted, null, 1))
-    // console.log(localStorage.getItem("useForm2"))
-  }, [submitted])
+    localStorage.setItem("useForm2", JSON.stringify(formInputs, null, 1))
+    console.log('GETLOCAL', localStorage.getItem("useForm2"))
+  }, [formInputs])
 
   const handleSubmit = e => {
     e.preventDefault()
 
     // convert form's nodelist to an array
-    const formInputs = Array.apply(null, ...addCounterFormEl.current.elements).filter(
+    // const formInputs = Array.apply(null, ...addCounterFormEl.current.elements).filter(
+    formInputs = [...addCounterFormEl.current.elements].filter(
       element => element.type === "text" && "number"
     )
 
-    console.log('formInputs', typeof formInputs, formInputs)
+    console.log('formInputs', Array.isArray([...formInputs]), formInputs)
 
     console.log('running reduce')
     const newSubmitted = formInputs.reduce((acc, input) => {
-      console.log(input.name, input.value, 'acc', acc)
       return {
         ...acc,
         [input.name]: input.value,
       }
     })
 
+    console.log("setting state", newSubmitted)
+
     setSubmitted(prevSubmitted => {
-      console.log("setting state", newSubmitted)
       return [...prevSubmitted, newSubmitted]
     })
   }
@@ -57,17 +59,17 @@ const UseForm2 = () => {
       <div>
         {/* https://codesandbox.io/s/vmwxjnv433?from-embed */}
         <h3 id="list-title">Submitted values</h3>
-        <ol aria-labelledby="list-title">
+        <div aria-labelledby="list-title">
           {submitted.map((input, i) => (
-            <li key={`pretendThisIsNotAnIndex${i}`}>
+            <div key={`pretendThisIsNotAnIndex${i}`}>
               title: {input.title}
               text: {input.text}
               rate: {input.rate}
               delay: {input.delay}
               emoji: {input.emoji}
-            </li>
+            </div>
           ))}
-        </ol>
+        </div>
       </div>
     </>
   )
