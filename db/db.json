@@ -1,0 +1,22 @@
+{
+  "Counters": {
+    "WorldPopulationGrowth": {
+      "id": 1,
+      "rate": 4.1666,
+      "initialCount": 0,
+      "delay": 100,
+      "title": "WorldPopulationGrowth",
+      "text": "Since You've Been Here",
+      "emoji": "👶"
+    },
+    "WorldDeathRate": {
+      "id": 2,
+      "rate": 4.1666,
+      "initialCount": 0,
+      "delay": 100,
+      "title": "World Death Rate",
+      "text": "Since You've Been Here",
+      "emoji": "☠️"
+    }
+  }
+}
