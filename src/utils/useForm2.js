@@ -4,7 +4,7 @@ const UseForm2 = () => {
   const addCounterFormEl = useRef()
   const [submitted, setSubmitted] = useState([])
 
-  let formInputs
+  let formInputs = []
   // console.log(addCounterFormEl.current.elements)
   useEffect(() => {
     console.log("submitted")
