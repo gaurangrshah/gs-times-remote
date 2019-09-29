@@ -6,7 +6,8 @@ const UseForm2 = () => {
 
   useEffect(() => {
     if (submitted.length > 0) {
-      const latestInput = submitted[submitted.length - 1]
+      const latestInput = submitted[submitted.length - 1] // select last item off the array
+      // set local storate wtih latest updates:
       localStorage.setItem("useForm2", JSON.stringify(latestInput, null, 2))
     }
   }, [submitted])
@@ -16,7 +17,7 @@ const UseForm2 = () => {
     e.preventDefault()
     // grab all form inputs to a array||nodelist
     const formInputs = [...addCounterFormEl.current.elements].filter(
-      element => { // filter thru each input element
+      element => {
         // keep all elements that have a type of text||number
         return element.type === "text" || element.type === "number"
       }
@@ -30,13 +31,11 @@ const UseForm2 = () => {
       }
     }, {}) // initializes an empty object to add the accumulated items to.
 
-    // set state with the new object:
+    console.log('newSubmitted', newSubmitted)
     setSubmitted(prevSubmitted => {
-      // set newSubmitted to state.
       return [...prevSubmitted, newSubmitted]
     })
 
-    // reset inputs
     return [...addCounterFormEl.current.elements].forEach((el) => {
       el.value = ""
     })
@@ -45,16 +44,21 @@ const UseForm2 = () => {
   return (
     <>
       <form ref={addCounterFormEl} onSubmit={handleSubmit}>
-        <label htmlFor="title-input">title</label>
+        <label htmlFor="title-input">title
         <input id="title-input" name="title" placeholder="" autoComplete="off" />
-        <label htmlFor="text-input">text</label>
+        </label>
+        <label htmlFor="text-input">text
         <input id="text-input" name="text" placeholder="" autoComplete="off" />
-        <label htmlFor="rate-input">rate</label>
+        </label>
+        <label htmlFor="rate-input">rate
         <input id="rate-input" type="number" name="rate" placeholder="" autoComplete="off" />
-        <label htmlFor="delay-input">delay</label>
+        </label>
+        <label htmlFor="delay-input">delay
         <input id="delay-input" type="number" name="delay" placeholder="" autoComplete="off" />
-        <label htmlFor="emoji-input">emoji</label>
+        </label>
+        <label htmlFor="emoji-input">emoji
         <input id="emoji-input" name="emoji" placeholder="" autoComplete="off" />
+        </label>
         <button type="submit">SUBMIT</button>
       </form>
       <div>
