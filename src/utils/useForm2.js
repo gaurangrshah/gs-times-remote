@@ -4,46 +4,35 @@ const UseForm2 = () => {
   const addCounterFormEl = useRef()
   const [submitted, setSubmitted] = useState([])
 
-
-  // console.log(addCounterFormEl.current.elements)
   useEffect(() => {
-    // console.log("submitted", submitted)
     if (submitted.length > 0) {
       const latestInput = submitted[submitted.length - 1]
-      // console.log(latestInput)
       localStorage.setItem("useForm2", JSON.stringify(latestInput, null, 2))
-      // console.log("getstorage", JSON.parse(localStorage.getItem("useForm2")))
     }
   }, [submitted])
 
 
   const handleSubmit = e => {
     e.preventDefault()
-
-    // convert form's nodelist to an array -- uncomment below if current method fails...
-    // const formInputs = Array.apply(null, ...addCounterFormEl.current.elements).filter(
+    // grab all form inputs to a array||nodelist
     const formInputs = [...addCounterFormEl.current.elements].filter(
-      element => {
-        // console.log(element.type)
+      element => { // filter thru each input element
+        // keep all elements that have a type of text||number
         return element.type === "text" || element.type === "number"
       }
     )
 
-    // check if formInputs is actually an array:
-    // console.log('formInputs', Array.isArray([...formInputs]), formInputs)
-
-
-    // reduce formInputs to an object, with the input.name as the key and input.value as the value
-    // console.log('running reduce')
     const newSubmitted = formInputs.reduce((acc, input) => {
+      // reduce [formInputs] to an object, as key=input.name: value=input.value
       return {
         ...acc,
         [input.name]: input.value,
       }
-    }, {})
+    }, {}) // initializes an empty object to add the accumulated items to.
 
     // set state with the new object:
     setSubmitted(prevSubmitted => {
+      // set newSubmitted to state.
       return [...prevSubmitted, newSubmitted]
     })
 
@@ -58,7 +47,6 @@ const UseForm2 = () => {
       <form ref={addCounterFormEl} onSubmit={handleSubmit}>
         <label htmlFor="title-input">title</label>
         <input id="title-input" name="title" placeholder="" autoComplete="off" />
-        {/* <input id="title-input" name="title" placeholder=""  pattern="/^\S*$/" autoComplete="off" /> */}
         <label htmlFor="text-input">text</label>
         <input id="text-input" name="text" placeholder="" autoComplete="off" />
         <label htmlFor="rate-input">rate</label>
