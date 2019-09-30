@@ -3,7 +3,7 @@ import AddCounterFormInput from "./AddCounterFormInput"
 import AddFormSubmits from "./AddFormSubmits"
 
 const AddCounterForm = ({ formRef, handleSubmit, submitted }) => {
-
+  console.log('submitted', typeof submitted, Array.isArray(submitted))
   return (
     <>
       <form ref={formRef} onSubmit={handleSubmit}>

@@ -4,7 +4,7 @@ const AddCounterFormInput = ({ inputName = "title" }) => {
   return (
 
     <label htmlFor={`${inputName}-input`}>{inputName}
-      <input id={`${inputName}-input`} name={`${inputName}-input`} placeholder={`${inputName}`} autoComplete="off" />
+      <input id={`${inputName}-input`} name={inputName} placeholder={`${inputName}`} autoComplete="off" />
     </label>
 
   )

@@ -7,9 +7,10 @@ const AddCounterFormPrep = () => {
 
   useEffect(() => {
     if (submitted.length > 0) {
+
       const latestInput = submitted[submitted.length - 1] // select last item off the array
       // set local storate wtih latest updates:
-
+      console.log('latestInput', latestInput)
       localStorage.setItem(latestInput.title, JSON.stringify(latestInput, null, 2))
     }
   }, [submitted])
@@ -33,7 +34,7 @@ const AddCounterFormPrep = () => {
       }
     }, {}) // initializes an empty object to add the accumulated items to.
 
-    console.log('newSubmitted', newSubmitted)
+    // console.log('newSubmitted', newSubmitted)
     setSubmitted(prevSubmitted => {
       return [...prevSubmitted, newSubmitted]
     })
@@ -44,7 +45,7 @@ const AddCounterFormPrep = () => {
   }
 
   return (
-    <AddCounterForm formRef={addCounterFormEl} handleSubmit={handleSubmit} submitted={submitted} />
+    <AddCounterForm formRef={addCounterFormEl} handleSubmit={handleSubmit} submitted={[...submitted]} />
   )
 }
 
